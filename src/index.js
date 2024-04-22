@@ -36,17 +36,17 @@
     {
         name: 'Bimpe',
         age: 42,
-        favoriteFoods: ['rice', 'fish'],
+        favoriteFoods: ['rice', 'Burrito'],
     },
     {
-        name: 'Morgan',
+        name: 'Mary',
         age: 61,
         favoriteFoods: ['noodles', 'rice'],
     },
     {
         name: 'Soji',
         age: 22,
-        favoriteFoods: ['poundo', 'semo'],
+        favoriteFoods: ['poundo', 'Burrito'],
     },
     ];
 
@@ -130,13 +130,13 @@
         if (!person) {
         console.log('No person found with the specified _id.');
         } else {
-        // Add "pizza" to the favoriteFoods array
-        person.favoriteFoods.push('pizza');
+        // Add "hamburger" to the favoriteFoods array
+        person.favoriteFoods.push('hamburger');
 
         // Save the updated Person
         await person.save();
 
-        console.log('Person updated with "sharwama" added to favoriteFoods:', person);
+        console.log('Person updated with "hamburger" added to favoriteFoods:', person);
         }
     } catch (err) {
         console.error('Error:', err);
@@ -155,7 +155,7 @@
         // Find the person by name and update their age to 20
         const updatedPerson = await Person.findOneAndUpdate(
         { name: personName },
-        { age: 18 },
+        { age: 20 },
         { new: true } // Return the updated document
         ).exec();
 
@@ -198,43 +198,43 @@
 
 
 
-    // Function to delete people named "Sola"
-    async function deletePeopleNamedSola() {
+    // Function to delete people named "Mary"
+    async function deletePeopleNamedMary() {
     try {
-        const result = await Person.deleteMany({ name: 'Sola' }).exec();
-        console.log(`Deleted ${result.deletedCount} people named Sola.`);
+        const result = await Person.deleteMany({ name: 'Mary' }).exec();
+        console.log(`Deleted ${result.deletedCount} people named Mary.`);
     } catch (err) {
         console.error('Error:', err);
     }
     }
-    deletePeopleNamedSola();
+    deletePeopleNamedMary();
 
 
 
 
-    // Find people who like pizza, sort by name, limit to 2, and hide age
-    function findPizzaLovers() {
-    return Person.find({ favoriteFoods: 'Pizza' })
+        // Find people who like burritos, sort by name, limit to 2, and hide age
+    function findBurritoLovers() {
+        return Person.find({ favoriteFoods: 'Burritos' })
         .sort('name')
         .limit(2)
         .select({ age: 0 }) // Exclude the 'age' field
         .then(data => {
-        console.log('Pizza Lovers:', data);
-        return data; // You can return the data if needed
+            console.log('Burrito Lovers:', data);
+            return data; // You can return the data if needed
         })
         .catch(err => {
-        console.error('Error:', err);
-        throw err;
+            console.error('Error:', err);
+            throw err;
         });
     }
-
+    
     // Usage example..... Call the function
-    findPizzaLovers()
-    .then(data => {
+    findBurritoLovers()
+        .then(data => {
         // Use the data as needed
         console.log('Result:', data);
-    })
-    .catch(err => {
+        })
+        .catch(err => {
         // Handle any errors here
         console.error('Error:', err);
-    });
+        });
